@@ -1,0 +1,5 @@
+config,prior_dui_count_cite_pct,prior_dui_count_freq_rank,prior_dui_count_mean_pos,prior_dui_count_order_rank,bac_cite_pct,bac_freq_rank,bac_mean_pos,bac_order_rank,distance_km_cite_pct,distance_km_freq_rank,distance_km_mean_pos,distance_km_order_rank,offense_year_cite_pct,offense_year_freq_rank,offense_year_mean_pos,offense_year_order_rank,vehicle_cite_pct,vehicle_freq_rank,vehicle_mean_pos,vehicle_order_rank
+GPT zero-shot,96.3,5,1.95,2,99.3,2,1.88,1,99.1,3,3.04,3,99.7,1,4.23,4,98.1,4,4.65,5
+Qwen zero-shot,75.4,2,1.02,1,99.8,1,1.75,2,51.0,3,2.67,3,32.9,4,3.28,4,26.9,5,3.61,5
+GPT few-shot,100.0,1,1.0,1,99.8,3,2.06,2,99.7,4,3.06,3,100.0,2,4.07,4,57.1,5,5.01,5
+Qwen few-shot,90.3,4,1.04,1,99.8,2,1.89,2,98.8,3,2.89,3,99.9,1,3.88,5,0.3,5,3.5,4

@@ -1,0 +1,23 @@
+# Secrets — never commit
+.env
+*api_key*
+*secret*
+*.key
+
+# Everything code/prepare_workspace.py stages, plus what the pipeline writes on
+# top of it. The released subset lives in data/raw/ and IS tracked; these are the
+# regenerable scratch copies.
+**/stage1_prepared.parquet
+dataset/
+outputs/
+experiment_v4/
+
+# Python / OS / editor
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+.DS_Store
+Thumbs.db
+~$*
+*.log

@@ -1,0 +1,104 @@
+This repository is covered by two licences.
+
+  Code  (2_experiment/2-1_experiment_code/, and every script in this repository)  -> MIT License, below.
+  Data  (1_dataset/, all subfolders)                       -> CC BY-NC 4.0, below.
+
+Figures, tables, and the supplement accompany the article and follow the
+journal's terms.
+
+======================================================================
+PART 1 OF 2 - CODE: MIT License
+======================================================================
+
+MIT License
+
+Copyright (c) 2026 The Authors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+======================================================================
+PART 2 OF 2 - DATA: Creative Commons Attribution-NonCommercial 4.0
+                    International (CC BY-NC 4.0)
+======================================================================
+
+Everything under 1_dataset/ is a modified subset of a third-party corpus and is
+redistributed under that corpus's licence.
+
+SOURCE
+  Title    LBox Open (lbox_open), task ljp_criminal
+  Creator  LBox Co., Ltd.
+  Source   https://github.com/lbox-kr/lbox-open
+           https://huggingface.co/datasets/lbox/lbox_open
+  Licence  Creative Commons Attribution-NonCommercial 4.0 International
+           (CC BY-NC 4.0)
+           Deed:       https://creativecommons.org/licenses/by-nc/4.0/
+           Legal code: https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+  Cite as  Hwang, W., Lee, D., Cho, K., Lee, H., & Seo, M. (2022). A Multi-Task
+           Benchmark for Korean Legal Language Understanding and Judgement
+           Prediction. Advances in Neural Information Processing Systems 35,
+           Datasets and Benchmarks Track. arXiv:2206.05224
+
+MODIFICATIONS MADE BY THE AUTHORS
+  Indicated as required by CC BY-NC 4.0, Section 3(a)(1)(B).
+
+  1. Filtered to casename == "도로교통법위반(음주운전)" (Road Traffic Act
+     violation, drunk driving), yielding 1,644 records.
+  2. Removed 144 duplicated records. The source test2 split is a strict subset
+     of the source test split (same id, facts, and label), leaving 1,500
+     unique cases.
+  3. Recoded label.imprisonment_with_labor_lv (0-4 in this subset) into a
+     4-class ordinal target, merging levels 1 and 2.
+  4. Added five feature columns created by the authors - blood alcohol
+     concentration, driving distance, vehicle type, prior-DUI count, and
+     offence year - rule-extracted from the facts text and then verified case
+     by case by a licensed Korean attorney.
+  5. Added a group_key grouping index derived from normalised facts text.
+  6. The facts, reason, and ruling text of retained records is reproduced
+     verbatim. No text was altered, and nothing was added to or removed from
+     the text of any record.
+
+TERMS
+  This modified subset is licensed to you under CC BY-NC 4.0, the same terms
+  as the source material. In summary, you may share and adapt it provided that
+  you give appropriate credit to LBox Co., Ltd., link to the licence, and
+  indicate whether you made changes; and provided that you do not use it for
+  commercial purposes. You may not apply legal terms or technological measures
+  that legally restrict others from doing anything the licence permits. The
+  full legal code governs and is available at the URL above.
+
+  No warranties are given. The licence may not give you all of the permissions
+  necessary for your intended use; other rights such as publicity, privacy, or
+  moral rights may limit how you use the material.
+
+NOTE ON THE DERIVED ANNOTATIONS
+  The five feature columns and the 4-class label mapping are the authors' own
+  work. Taken alone and without any source text - that is, the contents of
+  1_dataset/benchmark/ - they are additionally offered under the Creative Commons
+  Attribution 4.0 International licence (CC BY 4.0),
+  https://creativecommons.org/licenses/by/4.0/. This additional offer does not
+  extend to 1_dataset/raw/, which contains source text, nor does it remove the
+  CC BY-NC 4.0 terms from any file that is distributed together with source
+  text.
+
+NOTE ON THE UNDERLYING JUDGMENTS
+  The records originate from decisions of the Korean courts. Under Article 7
+  of the Korean Copyright Act, judgments and decisions of the courts are not
+  subject to copyright protection. The terms above are honoured as the licence
+  under which the compiled corpus was made available.

@@ -1,0 +1,5 @@
+﻿config,n,qwk_ml,qwk_llm,dqwk,ci_lo,ci_hi,excludes_zero
+GPT zero-shot,1500,0.357,0.18,0.177,0.127,0.226,True
+Qwen zero-shot,1500,0.357,0.184,0.174,0.116,0.231,True
+GPT few-shot,1500,0.357,0.336,0.021,-0.029,0.071,False
+Qwen few-shot,1500,0.357,0.24,0.118,0.062,0.172,True

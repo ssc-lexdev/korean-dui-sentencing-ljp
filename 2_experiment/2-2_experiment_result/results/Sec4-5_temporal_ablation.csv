@@ -1,0 +1,6 @@
+﻿analysis,variant,qwk,macro_f1
+temporal_ablation,all five factors,0.281,0.298
+temporal_ablation,drop prior-DUI count,0.066,0.23
+temporal_ablation,drop offence year,0.193,0.239
+prior_shap,pre-2021,1.461,
+prior_shap,post-2021,1.979,

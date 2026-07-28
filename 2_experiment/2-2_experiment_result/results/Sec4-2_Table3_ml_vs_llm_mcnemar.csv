@@ -1,0 +1,9 @@
+mode,ml,llm,n,ml_correct_pct,llm_correct_pct,b_ml_right_llm_wrong,c_ml_wrong_llm_right,mcnemar_stat,p_raw,favours,p_holm,sig_holm_0.05
+exact,svm+tfidf,GPT zero-shot,1500,60.1,18.1,749,120,453.837,1.0548103857463654e-100,ML,4.2192415429854616e-100,True
+exact,svm+tfidf,Qwen zero-shot,1500,60.1,60.5,244,251,0.073,0.7874064906662693,LLM,0.7874064906662693,False
+exact,svm+tfidf,GPT few-shot,1500,60.1,46.3,371,164,79.32,5.283226322243222e-19,ML,1.5849678966729666e-18,True
+exact,svm+tfidf,Qwen few-shot,1500,60.1,49.7,372,216,40.859,1.636311062447912e-10,ML,3.272622124895824e-10,True
+ordinal,svm+tfidf,GPT zero-shot,1500,85.0,84.3,187,177,0.223,0.6371208226382209,ML,0.6371208226382209,False
+ordinal,svm+tfidf,Qwen zero-shot,1500,85.0,88.0,79,124,9.537,0.0020137656481408624,LLM,0.004027531296281725,True
+ordinal,svm+tfidf,GPT few-shot,1500,85.0,90.3,68,147,28.298,1.040208798752197e-07,LLM,4.160835195008788e-07,True
+ordinal,svm+tfidf,Qwen few-shot,1500,85.0,88.8,63,120,17.137,3.47852602805345e-05,LLM,0.00010435578084160349,True

@@ -1,0 +1,6 @@
+﻿factor,shap_importance,rank
+bac,1.4578108825402993,2
+distance_km,0.7865630943919226,3
+vehicle,0.27749990897881305,5
+prior_dui_count,1.5310285892360542,1
+offense_year,0.650586150807027,4

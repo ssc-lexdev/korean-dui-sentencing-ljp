@@ -1,0 +1,97 @@
+Figure and table files
+======================
+Formatted per the target journal's author instructions for figure files, table
+files, figure and table referencing, table styling, and figure styling.
+
+Each figure and each table is supplied as a SEPARATE file (not embedded in the
+manuscript). Cite them in the text in ascending order. Enter the title + legend
+below for each item during online submission.
+
+Formatting applied:
+  - Tables: page margins set to 2.5 cm on all sides (journal requirement);
+    columns rescaled to fit within the printable width; roman black text;
+    title above table, footnote below; bold emphasis explained in the legend
+    (Tables 2 and 3).
+  - Figures: PNG, RGB, white background, labelled axes, no embedded overall
+    title/legend (multipart panel headers on Figure 2 are panel identifiers).
+  - Filenames follow the form 'Figure_1.png' / 'Table_1.docx'. If the journal
+    requires a space rather than an underscore, rename on upload.
+
+Main-text figures (PNG, RGB; in 4_figures/):
+  Figure_1.png  (3082 x 1053 px)
+  Figure_2.png  (3332 x 1269 px)
+  Figure_3.png  (2119 x 1039 px)
+
+Supplementary figures (PNG, RGB; in 5_supplement/; upload as Supplemental Files):
+  5_supplement/Figure_S1.png   SHAP beeswarm, class 3
+  5_supplement/Figure_S2.png   SHAP local waterfall, one class-3 case
+    Regenerated with the default font so the Unicode minus renders correctly (the
+    earlier version showed a missing-glyph box on a negative value) and with no
+    embedded title; caption supplied below.
+
+Supplementary documents (in 5_supplement/):
+  5_supplement/few_shot_open_book_prompt.md
+    Full few-shot open-book prompt + statute (Art. 148-2) + sentencing guideline,
+    Korean original and English translation. Sections 2 and 3 are a condensed
+    reading version; the exact statute and guideline string sent to the models is
+    2_experiment/2-1_experiment_code/law_context.txt, which stage6_llm.py reads directly.
+
+Tables (editable Word, one table per file, landscape, 2.5 cm margins; in 3_tables/):
+  Table_1.docx, Table_2.docx, Table_3.docx, Table_4.docx
+
+----------------------------------------------------------------------
+FIGURE TITLES & LEGENDS
+----------------------------------------------------------------------
+Figure 1. Data and evaluation pipeline.
+  From the LBOX OPEN drunk-driving subset through duplicate reconciliation
+  (test2 subset of test -> 1,500 unique cases), lawyer-verified factor extraction
+  (98.5% accuracy), the eight ML configurations and four LLM configurations, to the
+  prediction (RQ1, RQ2), explanation (RQ3), and temporal-robustness analyses.
+
+Figure 2. Error geometry and LLM bias.
+  Row-normalized (recall) confusion matrices for the best ML model (SVM + TF-IDF)
+  and the two zero-shot LLMs, with a predicted-versus-true class-share strip below
+  each panel. The ML model spreads predictions across all four classes, whereas the
+  LLMs collapse in opposite directions: GPT-5 onto the minority short-sentence class
+  (69% of its predictions are class 1, against a true share of 7%), and Qwen3-8B onto
+  the majority medium class (80% class 2, with zero recall on the fine/none class).
+
+Figure 3. Global SHAP factor importance (r_ML).
+  Mean absolute SHAP value of each of the five sentencing factors for the LightGBM
+  model, establishing prior-DUI record and BAC as the dominant factors
+  (prior-DUI 1.53 > BAC 1.46 > driving distance 0.79 > offense year 0.65 >
+  vehicle type 0.28).
+
+----------------------------------------------------------------------
+SUPPLEMENTARY FIGURE TITLES & LEGENDS
+----------------------------------------------------------------------
+Figure S1. Per-class SHAP beeswarm for the long-imprisonment class (class 3).
+  Each point is a case; horizontal position is the SHAP value (impact on the
+  model's class-3 prediction) and color encodes the feature value (low to high).
+  Higher blood-alcohol concentration and more prior-DUI convictions push predictions
+  toward the long-imprisonment class, consistent with the global ranking r_ML
+  (Figure 3). Vehicle type is shown as its one-hot components. (LightGBM, TreeSHAP.)
+
+Figure S2. Local SHAP explanation (waterfall) for one representative class-3 case
+  (case id 4575). Bars show each factor's additive contribution from the base value
+  E[f(X)] = -4.648 to the model output f(x) = 1.521; blood-alcohol concentration
+  (+3.34) and driving distance (+1.43) dominate for this case. Provided to illustrate
+  the per-case decomposition behind the global ranking; it is not used in any
+  aggregate claim. (LightGBM, TreeSHAP.)
+
+----------------------------------------------------------------------
+TABLE TITLES (full caption + footnote are inside each .docx)
+----------------------------------------------------------------------
+Table 1. Positioning relative to representative prior work.
+Table 2. Model performance on the 1,500-case benchmark (5x5 group-aware CV).
+         Footnote marks the best configuration (SVM + TF-IDF) in bold and defines
+         Bal-acc, Acc, Tol(+/-1) and Repr.
+Table 3. ML versus LLM (accuracy/macro-F1/QWK and exact-match McNemar).
+         Footnote explains that bold marks the reference ML model (SVM + TF-IDF).
+Table 4. Explanation agreement (Kendall tau and top-set Jaccard, order signal).
+
+Note: the manuscript embeds no table and no figure. Its "Tables and Figures" section
+after the References lists only the numbers, titles and legends, so that the in-text
+citations can be followed; the table contents live in 3_tables/ and the images in
+4_figures/. Figures S1 and S2 are uploaded as Supplemental Files. At submission, upload
+the files in 4_figures/, 3_tables/ and 5_supplement/.

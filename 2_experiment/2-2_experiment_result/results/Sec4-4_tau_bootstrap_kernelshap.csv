@@ -1,0 +1,7 @@
+﻿analysis,config,point,ci_lo,ci_hi,rank
+order_tau,GPT zero-shot,0.8,0.8,1.0,
+order_tau,Qwen zero-shot,1.0,1.0,1.0,
+kernelshap_svm,bac,0.0198,,,1.0
+kernelshap_svm,prior_dui_count,0.0197,,,2.0
+kernelshap_svm,distance_km,0.012,,,3.0
+kernelshap_svm,offense_year,0.0088,,,4.0

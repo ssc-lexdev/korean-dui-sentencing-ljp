@@ -1,0 +1,5 @@
+config,n,independent_of_prompt,freq_tau,freq_perm_p,freq_J2,freq_J3,order_tau,order_perm_p,order_J2,order_J3
+GPT zero-shot,1500,yes,-0.2,0.8166666666666667,0.333,0.5,0.8,0.08333333333333333,1.0,1.0
+Qwen zero-shot,1500,yes,0.8,0.08333333333333333,1.0,1.0,1.0,0.016666666666666666,1.0,1.0
+GPT few-shot,1500,no (template echo),0.6,0.23333333333333334,0.333,0.5,1.0,0.016666666666666666,1.0,1.0
+Qwen few-shot,1500,no (template echo),0.0,1.0,0.333,0.5,0.8,0.08333333333333333,1.0,1.0

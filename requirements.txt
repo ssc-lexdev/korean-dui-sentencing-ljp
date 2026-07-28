@@ -1,0 +1,18 @@
+# One CPU environment covers every stage, including the LLM stage: both models are
+# called over HTTP, so no deep-learning framework and no GPU are needed.
+# Python 3.13.9
+# Install all of these. statsmodels is required by stage4_stats.py and stage7_h2.py;
+# shap and lightgbm by stage5_shap.py and stage8b_tau_kernelshap.py; openai by stage6_llm.py.
+numpy==2.3.5
+pandas==2.3.3
+scipy==1.16.3
+scikit-learn==1.7.2
+lightgbm==4.6.0
+xgboost==3.2.0
+shap==0.52.0
+lime
+statsmodels==0.14.5
+matplotlib==3.10.6
+openai==2.36.0
+datasets==5.0.0
+pyarrow==21.0.0

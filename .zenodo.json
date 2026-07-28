@@ -1,0 +1,44 @@
+{
+  "upload_type": "software",
+  "title": "Korean DUI Legal Judgment Prediction: Classical ML, LLMs, and Explanation Agreement (reproduction materials)",
+  "creators": [
+    {
+      "name": "Choi, Sungsoo",
+      "affiliation": "Seoul AI School, aSSIST University, Seoul, Republic of Korea"
+    },
+    {
+      "name": "Oh, Taeyeon",
+      "affiliation": "Seoul AI School, aSSIST University, Seoul, Republic of Korea"
+    }
+  ],
+  "description": "<p>Reproduction materials for a study of Legal Judgment Prediction (LJP) on Korean drunk-driving cases: an attorney-verified benchmark of 1,500 cases drawn from the LBox Open corpus, eight classical machine-learning configurations, four large-language-model configurations, and a comparison of the two model families on both sentence prediction and explanation.</p><p>The archive contains the dataset in open formats, the analysis code as it was run, the model predictions and cached LLM replies, the statistical result tables, and the figures, tables, and supplement. Every reported number can be regenerated from these files.</p><p>The dataset in <code>1_dataset/</code> is also deposited separately, under its own DOI, so that it can be cited and reused independently of these experiments.</p>",
+  "license": "cc-by-nc-4.0",
+  "access_right": "open",
+  "language": "eng",
+  "keywords": [
+    "legal judgment prediction",
+    "ordinal classification",
+    "large language models",
+    "explainability",
+    "SHAP",
+    "model comparison",
+    "Korean law",
+    "sentencing",
+    "drunk driving"
+  ],
+  "related_identifiers": [
+    {
+      "relation": "hasPart",
+      "identifier": "10.5281/zenodo.XXXXXXX",
+      "resource_type": "dataset",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isDerivedFrom",
+      "identifier": "10.48550/arXiv.2206.05224",
+      "resource_type": "dataset",
+      "scheme": "doi"
+    }
+  ],
+  "notes": "Two licences apply inside this archive: the code in 2_experiment/2-1_experiment_code/ is under the MIT License, and the data in 1_dataset/ is under CC BY-NC 4.0, inherited from the LBox Open source corpus. This record is labelled with the more restrictive of the two, CC BY-NC 4.0, because it governs the archive as a whole. See LICENSE in the repository for the full text of both."
+}
