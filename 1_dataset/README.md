@@ -6,8 +6,8 @@ licensed Korean attorney verified case by case.
 
 This folder is self-contained and is deposited under its own DOI,
 https://doi.org/10.5281/zenodo.21647662, separately from the experiments that use it.
-The analysis code, model predictions, and statistical results live in
-`../2_experiment/`.
+The analysis code, model predictions, and statistical results live in the accompanying
+repository, https://github.com/ssc-lexdev/korean-dui-sentencing-ljp.
 
 ## Description
 
