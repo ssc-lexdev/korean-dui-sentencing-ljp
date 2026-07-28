@@ -114,7 +114,7 @@ additionally offered under CC BY 4.0.
 Please cite both this dataset and the source corpus.
 
 > Choi, S., & Oh, T. (2026). *Korean DUI Sentencing Dataset: an attorney-verified
-> benchmark of 1,500 cases* [Data set]. Zenodo. https://doi.org/10.5281/zenodo.21647662
+> benchmark of 1,500 cases* (Version 1.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.21647662
 
 > Hwang, W., Lee, D., Cho, K., Lee, H., & Seo, M. (2022). A Multi-Task Benchmark for Korean
 > Legal Language Understanding and Judgement Prediction. *Advances in Neural Information
