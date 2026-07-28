@@ -1,6 +1,6 @@
 # Korean DUI Legal Judgment Prediction: Classical ML, LLMs, and Explanation Agreement
 
-[![Software DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21648936.svg)](https://doi.org/10.5281/zenodo.21648936)
+[![Software DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21648935.svg)](https://doi.org/10.5281/zenodo.21648935)
 [![Dataset DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21647662.svg)](https://doi.org/10.5281/zenodo.21647662)
 
 Reproduction materials for the paper:
@@ -353,8 +353,8 @@ Please cite the paper (citation to be added on publication), these reproduction 
 the dataset, and the source corpus.
 
 > Choi, S., & Oh, T. (2026). *Korean DUI Legal Judgment Prediction: Classical ML, LLMs,
-> and Explanation Agreement (reproduction materials)* (Version 1.0.0) [Software].
-> Zenodo. https://doi.org/10.5281/zenodo.21648936
+> and Explanation Agreement (reproduction materials)* [Software]. Zenodo.
+> https://doi.org/10.5281/zenodo.21648935
 
 > Choi, S., & Oh, T. (2026). *Korean DUI Sentencing Dataset: an attorney-verified
 > benchmark of 1,500 cases* (Version 1.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.21647662
@@ -363,8 +363,11 @@ the dataset, and the source corpus.
 > Legal Language Understanding and Judgement Prediction. *Advances in Neural Information
 > Processing Systems 35*, Datasets and Benchmarks Track. arXiv:2206.05224
 
-`CITATION.cff` carries the same information in machine-readable form, so GitHub's
-"Cite this repository" button and reference managers pick it up directly.
+The software DOI above is the all-versions DOI, which always resolves to the newest
+release; each release also carries its own DOI, shown on its Zenodo record. The dataset
+DOI is a version DOI, because that deposit is a fixed snapshot. `CITATION.cff` carries
+the same information in machine-readable form, so GitHub's "Cite this repository"
+button and reference managers pick it up directly.
 
 ---
 
