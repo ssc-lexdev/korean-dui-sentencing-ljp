@@ -15,7 +15,7 @@ authors:
   - family-names: Oh
     given-names: Taeyeon
     affiliation: "Seoul AI School, aSSIST University, Seoul, Republic of Korea"
-version: 1.0.1
+version: 1.0.2
 date-released: "2026-07-29"
 doi: 10.5281/zenodo.21648935
 license: CC-BY-NC-4.0
