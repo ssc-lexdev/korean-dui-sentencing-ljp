@@ -1,10 +1,12 @@
 # Korean DUI Legal Judgment Prediction: Classical ML, LLMs, and Explanation Agreement
 
+[![Software DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21648936.svg)](https://doi.org/10.5281/zenodo.21648936)
+[![Dataset DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21647662.svg)](https://doi.org/10.5281/zenodo.21647662)
+
 Reproduction materials for the paper:
 
-> *Reproducing and explaining legal judgment prediction on Korean drunk-driving cases:
-> a benchmark of classical machine learning, large language models, and cross-model
-> explanation agreement.*
+> *Predicting and explaining sentences in Korean drunk-driving cases: an empirical
+> comparison of classical machine learning and large language models.*
 
 - [Description](#description)
 - [Dataset information](#dataset-information)
@@ -347,8 +349,12 @@ The pipeline runs in nine stages, in this order.
 
 ## Citation
 
-Please cite the paper (citation to be added on publication), the dataset, and the source
-corpus.
+Please cite the paper (citation to be added on publication), these reproduction materials,
+the dataset, and the source corpus.
+
+> Choi, S., & Oh, T. (2026). *Korean DUI Legal Judgment Prediction: Classical ML, LLMs,
+> and Explanation Agreement (reproduction materials)* (Version 1.0.0) [Software].
+> Zenodo. https://doi.org/10.5281/zenodo.21648936
 
 > Choi, S., & Oh, T. (2026). *Korean DUI Sentencing Dataset: an attorney-verified
 > benchmark of 1,500 cases* (Version 1.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.21647662
@@ -357,10 +363,8 @@ corpus.
 > Legal Language Understanding and Judgement Prediction. *Advances in Neural Information
 > Processing Systems 35*, Datasets and Benchmarks Track. arXiv:2206.05224
 
-This repository is also archived at Zenodo under its own DOI, which is minted when a
-release is tagged and is shown on the repository page from then on. Cite that DOI when
-referring to a specific version of the code, and the dataset DOI above when referring to
-the data.
+`CITATION.cff` carries the same information in machine-readable form, so GitHub's
+"Cite this repository" button and reference managers pick it up directly.
 
 ---
 

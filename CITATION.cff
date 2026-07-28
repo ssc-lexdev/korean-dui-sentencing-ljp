@@ -1,0 +1,62 @@
+cff-version: 1.2.0
+message: "If you use this software or the dataset, please cite them as below."
+title: "Korean DUI Legal Judgment Prediction: Classical ML, LLMs, and Explanation Agreement (reproduction materials)"
+abstract: >-
+  Reproduction materials for a study of Legal Judgment Prediction on Korean
+  drunk-driving cases: an attorney-verified benchmark of 1,500 cases from the
+  LBox Open corpus, eight classical machine-learning configurations, four
+  large-language-model configurations, and a comparison of the two families on
+  both sentence prediction and explanation.
+type: software
+authors:
+  - family-names: Choi
+    given-names: Sungsoo
+    affiliation: "Seoul AI School, aSSIST University, Seoul, Republic of Korea"
+  - family-names: Oh
+    given-names: Taeyeon
+    affiliation: "Seoul AI School, aSSIST University, Seoul, Republic of Korea"
+version: 1.0.0
+date-released: "2026-07-28"
+doi: 10.5281/zenodo.21648936
+license: CC-BY-NC-4.0
+repository-code: "https://github.com/ssc-lexdev/korean-dui-sentencing-ljp"
+keywords:
+  - legal judgment prediction
+  - ordinal classification
+  - large language models
+  - explainability
+  - SHAP
+  - model comparison
+  - Korean law
+  - sentencing
+  - drunk driving
+references:
+  - type: data
+    title: "Korean DUI Sentencing Dataset: an attorney-verified benchmark of 1,500 cases"
+    authors:
+      - family-names: Choi
+        given-names: Sungsoo
+        affiliation: "Seoul AI School, aSSIST University, Seoul, Republic of Korea"
+      - family-names: Oh
+        given-names: Taeyeon
+        affiliation: "Seoul AI School, aSSIST University, Seoul, Republic of Korea"
+    version: 1.0.0
+    year: 2026
+    doi: 10.5281/zenodo.21647662
+    license: CC-BY-NC-4.0
+  - type: conference-paper
+    title: "A Multi-Task Benchmark for Korean Legal Language Understanding and Judgement Prediction"
+    authors:
+      - family-names: Hwang
+        given-names: Wonseok
+      - family-names: Lee
+        given-names: Dongjun
+      - family-names: Cho
+        given-names: Kyoungyeon
+      - family-names: Lee
+        given-names: Hanuhl
+      - family-names: Seo
+        given-names: Minjoon
+    collection-title: "Advances in Neural Information Processing Systems 35, Datasets and Benchmarks Track"
+    year: 2022
+    notes: "The source corpus (LBox Open) from which the dataset is derived."
