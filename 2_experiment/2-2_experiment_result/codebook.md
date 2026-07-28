@@ -15,7 +15,7 @@ The dataset these were produced from is documented in `../../1_dataset/codebook.
 
 ## 1. `predictions/` — model outputs
 
-`ml_oof_predictions.csv` / `.parquet` — 12,000 rows = 1,500 cases × 8 configurations.
+`ml_oof_predictions.csv` — 12,000 rows = 1,500 cases × 8 configurations.
 Out-of-fold predictions from repeated stratified group-aware 5×5 cross-validation.
 
 | column | type | description |
@@ -26,7 +26,7 @@ Out-of-fold predictions from repeated stratified group-aware 5×5 cross-validati
 | `y_true` | integer | true `class4` |
 | `y_pred` | integer | predicted `class4` |
 
-`llm_predictions.csv` / `.jsonl` / `.parquet` — 6,000 rows = 1,500 cases × 4 configurations.
+`llm_predictions.csv` / `.jsonl` — 6,000 rows = 1,500 cases × 4 configurations.
 
 | column | type | description |
 |---|---|---|

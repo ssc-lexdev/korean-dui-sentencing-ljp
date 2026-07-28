@@ -91,7 +91,7 @@ the paper for this reason, and accuracy is never used as a sole metric.
 
 ## 2. `benchmark/` — the attorney-verified feature table
 
-`benchmark_features.csv` / `.json` / `.parquet` — 1,500 rows, one per unique case. These
+`benchmark_features.csv` / `.json` — 1,500 rows, one per unique case. These
 five columns are the authors' own annotation: rule-extracted from `facts`, then reviewed
 case by case by a licensed Korean attorney, who corrected 114 of 7,500 values (98.5%
 initial accuracy). Per-feature accuracy of the automatic extraction before correction:

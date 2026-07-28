@@ -78,7 +78,7 @@ independently of these experiments. `1_dataset/README.md` is the fuller descript
 |---|---|
 | `1_dataset/raw/dui_cases_1644.{jsonl,csv}` | the drunk-driving subset of the source corpus, all four source splits. `id` is **not** unique here: the source `test2` split repeats 144 cases from `test` |
 | `1_dataset/raw/dui_cases_1500_unique.{jsonl,csv}` | the de-duplicated analysis set actually used in the paper, with the four-class target, the class name, and the grouping key attached |
-| `1_dataset/benchmark/benchmark_features.{csv,json,parquet}` | the 1,500-case benchmark: the five sentencing factors used as structured inputs (BAC, driving distance, vehicle type, prior-DUI count, offence year) and the four-class label |
+| `1_dataset/benchmark/benchmark_features.{csv,json}` | the 1,500-case benchmark: the five sentencing factors used as structured inputs (BAC, driving distance, vehicle type, prior-DUI count, offence year) and the four-class label |
 | `1_dataset/benchmark/splits.csv` | group-aware split definitions (`id`, `split`, `group_key`), train 1,200 / valid 150 / test 150 |
 
 The five feature columns are the authors' own annotation: rule-extracted from the facts
@@ -185,8 +185,8 @@ numbers can be inspected without re-running anything.
 
 | path | contents |
 |---|---|
-| `predictions/ml_oof_predictions.{csv,parquet}` | classical-ML out-of-fold predictions, 1,500 cases × 8 configurations |
-| `predictions/llm_predictions.{csv,jsonl,parquet}` | LLM predictions, 1,500 cases × 4 configurations, including the factors each model said it relied on |
+| `predictions/ml_oof_predictions.csv` | classical-ML out-of-fold predictions, 1,500 cases × 8 configurations |
+| `predictions/llm_predictions.{csv,jsonl}` | LLM predictions, 1,500 cases × 4 configurations, including the factors each model said it relied on |
 | `llm_caches/*.json` | the models' replies verbatim, keyed by case `id`; these reproduce every LLM number without calling an API |
 | `results/*.csv` | the statistical result tables, each named for the manuscript section, table, or figure it supports, so the folder sorts in manuscript order |
 

@@ -43,7 +43,6 @@ vehicle 93.9%, prior convictions 99.7%, year 99.9%.
 | `raw/dui_cases_1500_unique.csv` | 1,500 | the flattened form of the above |
 | `benchmark/benchmark_features.csv` | 1,500 | the five verified factors and the four-class label |
 | `benchmark/benchmark_features.json` | 1,500 | the same table as JSON records |
-| `benchmark/benchmark_features.parquet` | 1,500 | the same table as Parquet, for convenience |
 | `benchmark/splits.csv` | 1,500 | `id`, `split`, and `group_key` for group-aware evaluation |
 
 **`codebook.md` defines every column of every file above.** Read it first.
