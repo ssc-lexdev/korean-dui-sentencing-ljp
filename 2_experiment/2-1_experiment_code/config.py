@@ -22,7 +22,8 @@ SPLITS = ["train", "valid", "test", "test2"]
 SEED = 42
 
 def set_seed(seed: int = SEED) -> None:
-    """Fix the global seed (numpy, random; torch is handled on Colab, Stage 6)."""
+    """Fix the global seed (numpy, random). Stage 6 calls both LLMs over HTTP APIs,
+    so no local model seeding is involved."""
     os.environ["PYTHONHASHSEED"] = str(seed)
     random.seed(seed)
     try:
@@ -69,11 +70,14 @@ CV_N_REPEATS = 5
 MULTIPLE_COMPARISON_CORRECTION = "holm"   # Holm / BH
 
 # -- LLMs (v4 Section 4.2) ------------------------------------------------
-LLM_CLOSED = "gpt-5.5"                     # OpenAI API (Stage 6)
-LLM_OPEN = "Qwen/Qwen3-8B-Instruct"        # Colab GPU (Stage 6)
+# The identifiers actually called in Stage 6. gpt-5.5 was planned but was not
+# available on the key, so gpt-5 was used; the open model was called through
+# the OpenRouter API, not run locally.
+LLM_CLOSED = "gpt-5"                       # OpenAI API (Stage 6)
+LLM_OPEN = "qwen/qwen3-8b"                 # OpenRouter API (Stage 6)
 LLM_TEMPERATURE = 0.0
 LLM_VARIANTS = ["zero_shot_closed_book", "few_shot_open_book"]
-FEW_SHOT_K = 5
+FEW_SHOT_K = N_CLASSES                     # one worked example per class
 
 # Statute and sentencing-guideline text used as the open-book context. The
 # original run assembled this from two .docx files; the exact resulting string
