@@ -47,13 +47,16 @@ called over HTTP, so `torch`, `transformers`, and `accelerate` are not required 
 - **Global seed**: `SEED = 42`, fixed via `config.set_seed()` for `random` and `numpy`.
   No local model training is involved in Stage 6, so no framework seeding applies there.
 - **Cross-validation**: repeated stratified, group-aware k-fold
-  (`CV_N_SPLITS = 5`, `CV_N_REPEATS = 5`); the fixed LBOX split is also reported for
-  comparability with prior work.
+  (`CV_N_SPLITS = 5`, `CV_N_REPEATS = 5`). The corpus's own train/valid/test split is
+  carried in `splits.csv` but is not used as an evaluation split; generalisation is
+  measured by the repeated cross-validation and by the temporal split (stage 9).
 - **LLM determinism**: `temperature = 0.0` for the open-weight model, and the minimal
-  reasoning-effort tier for the proprietary one; the model identifier, call timestamp, and
-  the fixed few-shot exemplar set are logged for every run. Proprietary-API outputs may
-  still drift across provider updates — an inherent limitation acknowledged in the paper.
-  The released response caches make the reported numbers reproducible regardless.
+  reasoning-effort tier for the proprietary one. The model identifiers and decoding
+  parameters are fixed in `stage6_llm.py`, and the few-shot exemplar set is deterministic
+  (the first training case of each class). Call timestamps are not recorded: the caches
+  store each reply verbatim, keyed by case id. Proprietary-API outputs may still drift
+  across provider updates — an inherent limitation acknowledged in the paper. The released
+  response caches make the reported numbers reproducible regardless.
 - **Leakage control**: all preprocessing (TF-IDF vectorizer fitting, scaling, resampling)
   is fit **inside the training fold only**; the rule-based sentencing-factor extractor is
   **frozen on the training fold** before being applied elsewhere.
