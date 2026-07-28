@@ -3,7 +3,7 @@
 Column definitions for every data file in this release. See `README.md` in this folder
 for the source, licence, and the list of modifications made to the source corpus.
 
-This codebook documents the dataset deposited at https://doi.org/10.5281/zenodo.XXXXXXX.
+This codebook documents the dataset deposited at https://doi.org/10.5281/zenodo.21647662.
 
 **Conventions**
 

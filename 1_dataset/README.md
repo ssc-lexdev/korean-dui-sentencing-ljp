@@ -5,7 +5,7 @@ to a four-class ordinal sentencing target, and annotated with five sentencing fa
 licensed Korean attorney verified case by case.
 
 This folder is self-contained and is deposited under its own DOI,
-https://doi.org/10.5281/zenodo.XXXXXXX, separately from the experiments that use it.
+https://doi.org/10.5281/zenodo.21647662, separately from the experiments that use it.
 The analysis code, model predictions, and statistical results live in
 `../2_experiment/`.
 
@@ -114,7 +114,7 @@ additionally offered under CC BY 4.0.
 Please cite both this dataset and the source corpus.
 
 > Choi, S., & Oh, T. (2026). *Korean DUI Sentencing Dataset: an attorney-verified
-> benchmark of 1,500 cases* [Data set]. Zenodo. https://doi.org/10.5281/zenodo.XXXXXXX
+> benchmark of 1,500 cases* [Data set]. Zenodo. https://doi.org/10.5281/zenodo.21647662
 
 > Hwang, W., Lee, D., Cho, K., Lee, H., & Seo, M. (2022). A Multi-Task Benchmark for Korean
 > Legal Language Understanding and Judgement Prediction. *Advances in Neural Information
