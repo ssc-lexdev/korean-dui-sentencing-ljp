@@ -31,6 +31,10 @@ LIMIT = int(sys.argv[1]) if len(sys.argv) > 1 else None
 # law_context.txt, next to this script. It is byte-identical to what was sent.
 # 5_supplement/few_shot_open_book_prompt.md renders the same material for human
 # reading and is lightly condensed; do not build the prompt from it.
+# law_context.txt is Korean statutory text (Criminal Act Article 148-2 and the Sentencing
+# Commission's drunk-driving guideline). It is left untranslated and unedited on purpose,
+# because it is the exact string the models received; an English translation of the whole of
+# it is provided in 5_supplement/few_shot_open_book_prompt.md, Sections 2 and 3.
 LAW = config.LAW_CONTEXT.read_text(encoding="utf-8").rstrip("\n")
 
 # -- Data ------------------------------------------------------------------
@@ -42,10 +46,35 @@ if LIMIT:
     df = df.groupby("class4", group_keys=False).head(max(2, LIMIT // 4)).head(LIMIT)
 print(f"Cases to run: {len(df)}")
 
+# -- Prompts ---------------------------------------------------------------
+# THE PROMPTS BELOW ARE IN KOREAN BY DESIGN AND ARE REPRODUCED VERBATIM. The corpus is Korean
+# and the models were asked to reason in the language of the source text, so the prompt string
+# is part of the experimental stimulus: translating it would change what was measured. An
+# English translation of every prompt is given in the comments here, and the full prompt is
+# documented side by side in Korean and English in
+# `5_supplement/few_shot_open_book_prompt.md`.
+#
+# CLASS_DEF - the four-class target, translated:
+#   0: a fine, or no custodial sentence imposed
+#   1: short imprisonment (about 3-10 months)
+#   2: medium imprisonment (about 12-17 months)
+#   3: long imprisonment (about 18 months or more)
 CLASS_DEF = ("0: 벌금형 또는 징역형 미선고\n"
              "1: 단기 징역 (약 3~10개월)\n"
              "2: 중기 징역 (약 12~17개월)\n"
              "3: 장기 징역 (약 18개월 이상)")
+# SYS_BASE - the instruction (system) prompt, translated:
+#   "You are an AI that predicts the sentence in Korean drunk-driving criminal cases. Predict the
+#    imprisonment level the court will impose, using only the criminal facts given to you.
+#    [Definition of the imprisonment levels] <CLASS_DEF>
+#    Answer in the following format only. Write nothing else.
+#    class: <one integer among 0, 1, 2, 3>
+#    factors: <the main sentencing factors your judgment rested on (e.g. prior drunk-driving
+#             convictions, blood alcohol concentration, driving distance, year of the offense,
+#             vehicle type)>"
+# The bracketed tags used in the prompt: [징역 레벨 정의] "definition of the imprisonment
+# levels", [관련 법령 및 양형기준] "relevant statutes and sentencing guidelines",
+# [범죄사실] "criminal facts" (the tag that introduces the case text in every user turn).
 SYS_BASE = ("당신은 한국 음주운전 형사사건의 양형을 예측하는 AI입니다. 주어진 범죄사실만 보고 "
             "법원이 선고할 징역 레벨을 예측하세요.\n\n[징역 레벨 정의]\n" + CLASS_DEF +
             "\n\n반드시 아래 형식으로만 답하세요. 다른 말은 쓰지 마세요.\n"
@@ -61,6 +90,9 @@ for c in range(config.N_CLASSES):
     if len(sub) == 0:
         continue
     ex = sub.iloc[0]
+    # The example answer names the factors in Korean, in the same vocabulary the models are
+    # asked to use. Translated: "prior drunk-driving convictions: N; blood alcohol
+    # concentration: X%; driving distance: Y km; year of the offense: Z".
     fa = (f"음주 전과 {ex['prior_dui_count']}회, 혈중알코올농도 {ex['bac']}%, "
           f"운전거리 {ex['distance_km']}km, 범행연도 {ex['offense_year']}")
     fewshot.append({"role": "user", "content": f"[범죄사실]\n{ex['facts']}"})
@@ -86,6 +118,7 @@ def parse(txt):
     return cls, (fm.group(1).strip()[:300] if fm else "")
 
 def call(client, model, system, shots, facts):
+    # [범죄사실] = "criminal facts": the tag that introduces the case text in every user turn.
     msgs = [{"role": "system", "content": system}] + shots + \
            [{"role": "user", "content": f"[범죄사실]\n{facts}"}]
     kw = dict(model=model, messages=msgs)

@@ -49,6 +49,11 @@ holding the model's reply verbatim, e.g.:
 { "4525": { "raw": "class: 2\nfactors: 음주 전과(동종 1회), 혈중알코올농도 0.252%(매우 높음), ..." } }
 ```
 
+The models were prompted in Korean and answered in Korean, so the cached replies are Korean;
+they are stored verbatim because they are the raw experimental output. The example above reads:
+`class: 2` / `factors: prior drunk-driving convictions (1 of the same kind), blood alcohol
+concentration 0.252% (very high), ...`.
+
 These make every LLM number in the paper reproducible without re-calling the APIs. They
 contain the models' restated factors, not source judgment text.
 
@@ -66,7 +71,7 @@ holds the mapping between the two, in `RESULT_TABLES`.
 
 | file | rows | supports | what it holds |
 |---|---|---|---|
-| `Sec3-1_leakage_audit.csv` | 1 | §3.1 | leakage audit of the 1,500 `facts` texts: current-disposition matches and 주문 headings found |
+| `Sec3-1_leakage_audit.csv` | 1 | §3.1 | leakage audit of the 1,500 `facts` texts: current-disposition matches and 주문 (*jumun*, the holding heading) matches found |
 | `Sec4-1_Table2_ml_performance_per_fold.csv` | 250 | Table 2, §4.1 | per-fold ML metrics (accuracy, macro-F1, QWK, balanced accuracy, MAE in levels and months) for 8 configurations × 25 folds. Table 2 reports the mean and standard deviation over the 25 folds |
 | `Sec4-1_h1_significance_tests.csv` | 16 | §4.1 (RQ1) | each model-representation against the majority baseline, on macro-F1 and QWK, with bootstrap and mixed-effects confidence intervals, Holm-adjusted p, Cohen's d |
 | `Sec4-2_Table3_ml_vs_llm_mcnemar.csv` | 8 | Table 3, §4.2 | McNemar, best ML against each LLM configuration, under exact-match and ordinal (±1) correctness |

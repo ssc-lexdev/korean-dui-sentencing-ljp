@@ -55,15 +55,15 @@ Nested fields, and their names in the flattened CSV:
 
 | JSONL path | CSV column | type | description |
 |---|---|---|---|
-| `label.text` | `label_text` | string | the sentence as written, e.g. `징역 12월` |
+| `label.text` | `label_text` | string | the sentence as written, e.g. `징역 12월` ("imprisonment, 12 months") |
 | `label.fine_lv` | `fine_lv` | integer | source corpus fine level, 0–4 |
 | `label.imprisonment_with_labor_lv` | `imprisonment_with_labor_lv` | integer | source corpus imprisonment-with-labour level. **The prediction target of this study.** Range 0–4 in this subset |
 | `label.imprisonment_without_labor_lv` | `imprisonment_without_labor_lv` | integer | imprisonment-without-labour level, 0–4 |
-| `ruling.text` | `ruling_text` | string | the disposition (주문) as written |
-| `ruling.parse.fine.type` | `ruling_fine_type` | string | `벌금` or empty |
+| `ruling.text` | `ruling_text` | string | the disposition as written. In a Korean judgment this section is headed 주문 (*jumun*, lit. "main text"): the operative holding that states the sentence |
+| `ruling.parse.fine.type` | `ruling_fine_type` | string | `벌금` (fine) or empty |
 | `ruling.parse.fine.unit` | `ruling_fine_unit` | string | currency unit or empty |
 | `ruling.parse.fine.value` | `ruling_fine_value` | integer | fine in KRW; `-1` = no fine imposed |
-| `ruling.parse.imprisonment.type` | `ruling_imprisonment_type` | string | `징역` / `집행유예` / `금고` / empty |
+| `ruling.parse.imprisonment.type` | `ruling_imprisonment_type` | string | `징역` (imprisonment with labour) / `집행유예` (suspended execution of sentence) / `금고` (confinement without labour) / empty |
 | `ruling.parse.imprisonment.unit` | `ruling_imprisonment_unit` | string | `mo` (months) or empty |
 | `ruling.parse.imprisonment.value` | `ruling_imprisonment_value` | integer | sentence length in months; `-1` = no custodial sentence |
 

@@ -134,6 +134,29 @@ run**, so they use the pipeline's internal file names rather than the publicatio
 `1_dataset/`; `prepare_workspace.py` reconciles the two (see [Usage
 instructions](#usage-instructions)).
 
+### A note on the Korean text in this repository
+
+**All comments, documentation, identifiers, and console output are in English.** Korean appears in
+three places only, and in each of them it is not commentary but material that the method operates
+on, so it is kept verbatim:
+
+| where | what it is | why it stays Korean |
+|---|---|---|
+| Regular expressions in `features.py` and `stage_disposition_audit.py` | patterns that match Korean court judgments | the corpus is Korean; translating a pattern would stop it matching and change every reported number |
+| Keyword maps in `stage8_agreement.py` and `stage8b_tau_kernelshap.py` | substrings that detect which sentencing factor an LLM rationale cites | the LLMs answer in Korean; these substrings *are* the operational definition of "the model cited this factor" |
+| Prompts in `stage6_llm.py` and `law_context.txt` | the instruction prompt, the statute, and the sentencing guideline sent to the models | the prompt is the experimental stimulus; rewriting it would change what was measured |
+
+**Every Korean token used anywhere in the code is glossed in English at the point of use**, so a
+reader who does not read Korean can follow and audit each rule from the comments alone. The full
+prompt is additionally reproduced side by side in Korean and English in
+[`5_supplement/few_shot_open_book_prompt.md`](5_supplement/few_shot_open_book_prompt.md).
+
+The data files under `1_dataset/` and the cached model replies under
+`2_experiment/2-2_experiment_result/llm_caches/` are Korean because they are primary research data:
+court judgments as published, and model outputs as returned. They are not translated, and must not
+be, for the results to remain reproducible. `1_dataset/codebook.md` explains every Korean-valued
+field in English.
+
 ### Shared modules and setup
 
 | file | what it does |

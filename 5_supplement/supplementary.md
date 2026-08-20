@@ -189,8 +189,10 @@ the factor remains the dominant structured predictor across the 2021 regime chan
 magnitudes are not directly comparable, as each subset's model has its own output scale).
 
 **(e) Disposition-leakage audit** (`stage_disposition_audit.py`). Over all 1,500 `facts` texts, a
-present-tense sentencing of the defendant (`피고인을 … 징역/금고/벌금 … 처한다/선고한다`) matched
-**0** cases and the holding heading `주문` matched **0**; sentencing verbs that do appear (74.3% of
+present-tense sentencing of the defendant (`피고인을 … 징역/금고/벌금 … 처한다/선고한다`, i.e.
+"the defendant is hereby sentenced to imprisonment / confinement / a fine of …") matched **0**
+cases, and the holding heading `주문` (*jumun*, lit. "main text" — the section of a Korean
+judgment that states the sentence) matched **0**; sentencing verbs that do appear (74.3% of
 texts) are prior-conviction recitations in the criminal-record section. No current disposition leaks
 into the model inputs.
 
