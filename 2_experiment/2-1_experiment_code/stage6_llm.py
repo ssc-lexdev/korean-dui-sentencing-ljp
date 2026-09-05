@@ -72,9 +72,9 @@ CLASS_DEF = ("0: 벌금형 또는 징역형 미선고\n"
 #    factors: <the main sentencing factors your judgment rested on (e.g. prior drunk-driving
 #             convictions, blood alcohol concentration, driving distance, year of the offense,
 #             vehicle type)>"
-# The bracketed tags used in the prompt: [징역 레벨 정의] "definition of the imprisonment
-# levels", [관련 법령 및 양형기준] "relevant statutes and sentencing guidelines",
-# [범죄사실] "criminal facts" (the tag that introduces the case text in every user turn).
+# The prompt uses three bracketed section tags. In the order they appear, they read
+# "definition of the imprisonment levels", "relevant statutes and sentencing guidelines", and
+# "criminal facts" (the tag that introduces the case text in every user turn).
 SYS_BASE = ("당신은 한국 음주운전 형사사건의 양형을 예측하는 AI입니다. 주어진 범죄사실만 보고 "
             "법원이 선고할 징역 레벨을 예측하세요.\n\n[징역 레벨 정의]\n" + CLASS_DEF +
             "\n\n반드시 아래 형식으로만 답하세요. 다른 말은 쓰지 마세요.\n"
@@ -118,7 +118,7 @@ def parse(txt):
     return cls, (fm.group(1).strip()[:300] if fm else "")
 
 def call(client, model, system, shots, facts):
-    # [범죄사실] = "criminal facts": the tag that introduces the case text in every user turn.
+    # The bracketed tag below reads "criminal facts"; it opens the case text in every user turn.
     msgs = [{"role": "system", "content": system}] + shots + \
            [{"role": "user", "content": f"[범죄사실]\n{facts}"}]
     kw = dict(model=model, messages=msgs)

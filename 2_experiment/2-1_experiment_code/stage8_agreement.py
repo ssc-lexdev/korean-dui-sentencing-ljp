@@ -31,22 +31,18 @@ FACTORS = ["prior_dui_count", "bac", "distance_km", "offense_year", "vehicle"]
 
 # Korean keyword map: factor -> substrings that signal a mention in the LLM rationale.
 # The LLMs answer in Korean, so these substrings must stay in Korean; they are the operational
-# definition of "the model cited this factor". English gloss of every keyword, in list order:
-#   prior_dui_count  전과 "prior conviction / criminal record", 동종 "of the same kind",
-#                    재범 "repeat offense", 누범 "recidivism (statutory aggravation)",
-#                    초범 "first-time offender"
-#   bac              혈중알코올 "blood alcohol", 알코올농도 "alcohol concentration",
-#                    혈중알콜 (variant spelling of 혈중알코올), 음주수치 / 음주 수치
-#                    "the measured drinking reading"
-#   distance_km      운전거리 / 운전 거리 "driving distance", 거리 "distance"
-#   offense_year     범행연도 / 범행 연도 "year of the offense", 연도 "year",
-#                    범행시기 / 범행 시기 "time of the offense", 범행시점 "point in time of
-#                    the offense"
-#   vehicle          차종 "vehicle type", 차량 "vehicle", 승용 "passenger (car)",
-#                    이륜 "two-wheeled", 오토바이 "motorbike", 트럭 "truck",
-#                    승합 "multi-passenger van", 버스 "bus", 택시 "taxi",
-#                    카니발 Carnival (a widely sold Korean MPV model), 화물 "freight, cargo",
-#                    스쿠터 "scooter", 원동기 "moped"
+# definition of "the model cited this factor". English meaning of every keyword, in the order
+# the keywords are listed for each factor below:
+#   prior_dui_count  "prior conviction / criminal record", "of the same kind", "repeat
+#                    offense", "recidivism (statutory aggravation)", "first-time offender"
+#   bac              "blood alcohol", "alcohol concentration", a variant spelling of "blood
+#                    alcohol", then "the measured drinking reading" in its two spacings
+#   distance_km      "driving distance" in its two spacings, then "distance"
+#   offense_year     "year of the offense" in its two spacings, "year", "time of the offense"
+#                    in its two spacings, "point in time of the offense"
+#   vehicle          "vehicle type", "vehicle", "passenger (car)", "two-wheeled", "motorbike",
+#                    "truck", "multi-passenger van", "bus", "taxi", Carnival (a widely sold
+#                    Korean MPV model), "freight, cargo", "scooter", "moped"
 KEYWORDS = {
     "prior_dui_count": ["전과", "동종", "재범", "누범", "초범"],
     "bac":             ["혈중알코올", "알코올농도", "혈중알콜", "음주수치", "음주 수치"],

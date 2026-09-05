@@ -12,24 +12,26 @@ parameters. Extraction quality is reported via a manual-validation sample in Sta
 NOTE ON THE KOREAN TEXT IN THIS FILE
 ------------------------------------
 The corpus consists of Korean court judgments, so every regular expression below must match
-Korean surface forms verbatim; the Korean string literals are part of the method and cannot be
-translated away without changing the results. All comments are in English, and every Korean
-token used in a pattern is glossed in English immediately above the pattern that uses it, so a
-reader who does not read Korean can follow and audit each rule from the glosses alone.
+Korean surface forms verbatim; those string literals are part of the method and cannot be
+translated away without changing the results. Every comment in this file is in English only.
+Where a pattern lists alternatives, the comment above it gives their English meanings in the
+same order as the alternatives appear in the pattern, so a reader who does not read Korean can
+follow and audit every rule from the comments alone.
 
-Two section terms recur throughout:
-  범죄사실 (beomjoe-sasil) - "criminal facts"; the heading that opens the present-offense
-                            narrative in a Korean judgment. Text before it is the prior record.
-  피고인은  (pigoin-eun)    - "the defendant [subject marker]"; opens a sentence narrating an
-                            act of the defendant.
+Two structural markers of a Korean judgment recur below and are named here in English:
+  the "criminal facts" heading   - opens the present-offense narrative; the text before it is
+                                   the prior-conviction listing.
+  the "the defendant ..." opener - the word for "the defendant" followed by the subject
+                                   marker; opens a sentence narrating an act of the defendant.
 """
 import re
 
 # -- Blood alcohol concentration -------------------------------------------
-# Korean tokens in the pattern:
-#   농도   "concentration" (as in 혈중알코올농도, "blood alcohol concentration")
-#   퍼센트 "percent", the spelled-out alternative to the "%" sign
-# Matches e.g. "혈중알콜농도 0.095%" (BAC 0.095%), "0.216퍼센트" (0.216 percent), and
+# The pattern anchors on the word for "concentration" (the final element of the compound
+# meaning "blood alcohol concentration"), then a decimal number, then either the "%" sign or
+# the spelled-out word for "percent".
+# It matches, for example, a blood-alcohol phrase followed by "0.095%", a bare number followed
+# by the word for percent ("0.216"), and
 # "0. 179%" (0.179% with a stray inner space, which the pattern tolerates).
 # Past convictions rarely state a BAC, but when they do the present-offense BAC comes LAST,
 # so take the last match.
@@ -39,13 +41,13 @@ def extract_bac(facts: str) -> float:
     return float(ms[-1].replace(" ", "")) if ms else float("nan")
 
 # -- Driving distance in km -------------------------------------------------
-# Korean tokens in the patterns are unit names only:
-#   킬로미터 / 키로미터 / 키로  "kilometre", in the three spellings found in the corpus;
-#                              ㎞ is the CJK single-character form of "km"
-#   미터  "metre";  ｍ is the full-width Latin "m" used in Korean typesetting
-# Metres are divided by 1000. Typical distance phrases: "약 300m의 구간" ("a stretch of about
-# 300 m"), "약 10m의 거리" ("a distance of about 10 m").
-# The trailing metre unit is usually followed by a Korean particle -- 의 ("of") in "m의" --
+# The Korean literals in these two patterns are unit names only.
+# Kilometre alternatives, in pattern order: the ASCII "km", the CJK single-character form of
+# "km", then the three Korean spellings of "kilometre" found in the corpus.
+# Metre alternatives, in pattern order: the ASCII "m", the Korean word for "metre", then the
+# full-width Latin "m" used in Korean typesetting. Metres are divided by 1000.
+# Typical distance phrases read "a stretch of about 300 m" or "a distance of about 10 m".
+# The trailing metre unit is usually followed by a Korean grammatical particle meaning "of"
 # rather than by whitespace, so no \b is used; a negative lookahead keeps the "m" of "km"
 # from matching as a metre unit.
 _RE_DIST_KM = re.compile(r"([0-9]+(?:\.[0-9]+)?)\s*(?:km|㎞|킬로미터|키로미터|키로)", re.IGNORECASE)
@@ -61,18 +63,17 @@ def extract_distance_km(facts: str) -> float:
 
 # -- Vehicle type (categorical) -------------------------------------------
 # Ordered checks: motorcycle > truck > van/bus > passenger > other.
-# Korean tokens, by branch:
-#   motorcycle 이륜 "two-wheeled", 오토바이 "motorbike", 원동기 "motorised bicycle / moped",
-#              스쿠터 "scooter"
-#   truck      화물 "freight, cargo" (as in 화물차, "cargo vehicle"), 트럭 "truck",
-#              덤프 "dump (truck)", plus five light-truck model names common in Korea:
-#              포터 Porter, 봉고 Bongo, 라보 Labo, 다마스 Damas, 마이티 Mighty
-#   van        승합 "multi-passenger (van)", 버스 "bus"
-#   passenger  승용 "passenger (car)"
+# The alternatives of each branch pattern, in the order they appear in that pattern:
+#   motorcycle "two-wheeled", "motorbike", "motorised bicycle / moped", "scooter"
+#   truck      "freight, cargo" (the first element of the compound for "cargo vehicle"),
+#              then five light-truck model names common in Korea -- Porter, Bongo, Labo,
+#              Damas, Mighty -- then "dump (truck)" and "truck"
+#   van        "multi-passenger (van)", "bus"
+#   passenger  "passenger (car)"
 def extract_vehicle(facts: str) -> str:
     if re.search(r"이륜|오토바이|원동기|스쿠터", facts):
         return "motorcycle"
-    # explicit 화물 ("freight, cargo") or a common 1-ton truck model name
+    # explicit "freight, cargo" or a common 1-ton truck model name
     if re.search(r"화물|포터|봉고|라보|다마스|마이티|덤프|트럭", facts):
         return "truck"
     if re.search(r"승합|버스", facts):
@@ -83,73 +84,71 @@ def extract_vehicle(facts: str) -> str:
 
 # -- Prior alcohol-related driving record count ---------------------------
 # DEFINITION (confirmed with domain expert): count every dated punishment entry in the
-# criminal-record section that is alcohol-related driving -- BOTH drunk driving
-# (음주운전, "drunk driving") AND refusal of a breath test (음주측정거부, "refusal of an
-# alcohol test"). All listed entries are counted (no offense-date filter). The record section
-# is the text before 범죄사실 ("criminal facts") when that tag is present (~35%); otherwise the
-# text before the LAST 피고인은 ("the defendant ...") sentence, which narrates the present
+# criminal-record section that is alcohol-related driving -- BOTH drunk driving AND refusal
+# of a breath test. All listed entries are counted (no offense-date filter). The record
+# section is the text before the "criminal facts" heading when that tag is present (~35%);
+# otherwise the text before the LAST "the defendant ..." sentence, which narrates the present
 # offense. This sentence-based split needs no clock-time pattern and excludes the present
 # offense date, so no adjustment is required. Counting dated events (not offense labels)
 # handles a single label covering several dated convictions.
 # The date pattern tolerates spaces around the dots ("2019. 6 . 25.") and an optional trailing
 # dot ("2020. 8. 17" before a clock time).
 _RE_RECORD_DATE = re.compile(r"(?:19|20)\d{2}\s*\.\s*\d{1,2}\s*\.\s*\d{1,2}\s*\.?")
-# 음주운전 "drunk driving" | 음주측정거부 "refusal of an alcohol test" | 측정거부 "refusal of
-# testing", the short form used once the alcohol context is established
+# The three alcohol-related charge names, in tuple order: "drunk driving", "refusal of an
+# alcohol test", and "refusal of testing", the short form used once the context is established
 _ALCOHOL_TERMS = ("음주운전", "음주측정거부", "측정거부")
-# Markers that occur in the PRESENT-offense sentence (never in the record listing):
-#   혈중알코올농도 (spelling variants) "blood alcohol concentration"
-#   술에 취한 "intoxicated, under the influence"
-#   음주측정 "alcohol testing"
-#   위드마크 "Widmark", i.e. the Widmark formula used to back-calculate BAC
+# Markers that occur in the PRESENT-offense sentence (never in the record listing), in
+# pattern order:
+#   "blood alcohol concentration", allowing for its spelling variants
+#   "intoxicated, under the influence"
+#   "alcohol testing"
+#   "Widmark", i.e. the Widmark formula used to back-calculate BAC
 _RE_PRESENT = re.compile(r"혈중알[코콜]+올?\s*농도|술에\s*취한|음주측정|위드마크")
 def _record_section(facts: str) -> str:
     """Text containing only the prior-conviction listing (excludes the present offense)."""
     if "범죄사실" in facts:                       # the "criminal facts" heading
         return facts.split("범죄사실")[0]
     # The present offense is the LAST sentence carrying a BAC/test marker (a past conviction
-    # can also state a BAC, so use the last marker, not the first). Cut at the 피고인은
-    # ("the defendant ...") that opens that sentence.
+    # can also state a BAC, so use the last marker, not the first). Cut at the
+    # "the defendant ..." opener that begins that sentence.
     ms = list(_RE_PRESENT.finditer(facts))
     if ms:
         idx = facts.rfind("피고인은", 0, ms[-1].start())
     else:
         idx = facts.rfind("피고인은")
     if idx <= 0:
-        # Only one 피고인은 in the whole text, as in "...전력이 있음에도, 피고인은 ... 운전"
-        # ("despite having a prior record, the defendant drove ..."). Split at the connector
-        # that closes the record clause instead:
-        #   있음에도 / 임에도 / 그럼에도 "despite (being)", 불구하고 "notwithstanding",
-        #   전력이 있 "has a prior record"
+        # Only one "the defendant ..." opener in the whole text, as in "despite having a
+        # prior record, the defendant drove ...". Split at the connector that closes the
+        # record clause instead. The alternatives below, in pattern order: "despite being"
+        # in its two spellings, "notwithstanding", "even so", and "has a prior record".
         m2 = re.search(r"있음에도|임에도|불구하고|그럼에도|전력이\s*있", facts)
         idx = m2.end() if m2 else 0
     return facts[:idx] if idx > 0 else ""
 # A genuine prior DUI entry = a DATE whose nearby context carries BOTH a punishment word
 # (which excludes parole / finality / execution-end / bare offense dates, none of which have
-# one) AND an alcohol-driving charge. The charge may be named explicitly (음주운전 "drunk
-# driving", 측정거부 "refusal of testing") or referred to anaphorically as 같은 죄 ("the same
-# offense"), which in a Korean record listing inherits the charge named in the preceding entry;
-# _RE_SAME together with the `last_alcohol` state below implements that inheritance. An
-# explicit non-alcohol charge (업무방해 "obstruction of business", 사기 "fraud", ...) breaks the
-# inheritance and drops the entry. A narrative count -- 동종전력이 N회 ("N prior offenses of the
-# same kind"), 총 N회의 동종전력 ("N same-kind prior offenses in total") -- overrides when larger.
-# Punishment words: 벌금 "fine", 징역 "imprisonment with labour", 금고 "confinement without
-#                   labour", 약식 "summary order", 선고 "pronouncement of sentence",
-#                   구류 "short-term detention"
+# one) AND an alcohol-driving charge. The charge may be named explicitly ("drunk driving",
+# "refusal of testing") or referred to anaphorically by the fixed phrase meaning "the same
+# offense" that _RE_SAME matches, which in a Korean record listing inherits the charge named
+# in the preceding entry; _RE_SAME together with the `last_alcohol` state below implements
+# that inheritance. An explicit non-alcohol charge ("obstruction of business", "fraud", ...)
+# breaks the inheritance and drops the entry. A narrative count -- "N prior offenses of the
+# same kind", "N same-kind prior offenses in total" -- overrides when larger.
+# Punishment words, in pattern order: "fine", "imprisonment with labour", "confinement
+# without labour", "summary order", "pronouncement of sentence", "short-term detention"
 _RE_PUNISH_CTX = re.compile(r"벌금|징역|금고|약식|선고|구류")
 _RE_ALCOHOL = re.compile(r"음주운전|음주측정거부|측정거부")
 _RE_SAME = re.compile(r"같은\s*죄")            # "the same offense" (anaphoric charge reference)
-# Non-alcohol charges, in pattern order: 업무방해 obstruction of business, 사기 fraud,
-# 절도 theft, 폭행 assault, 상해 bodily injury, 강제추행 indecent act by compulsion,
-# 성폭력 sexual violence, 마약 narcotics, 횡령 embezzlement, 배임 breach of trust,
-# 도주 fleeing the scene, 무면허운전 driving without a licence, 재물손괴 destruction of
-# property, 공무집행방해 obstruction of official duties
+# Non-alcohol charges, in pattern order: obstruction of business, fraud, theft, assault,
+# bodily injury, indecent act by compulsion, sexual violence, narcotics, embezzlement,
+# breach of trust, fleeing the scene, driving without a licence, destruction of property,
+# obstruction of official duties
 _RE_OTHER_CHARGE = re.compile(r"업무방해|사기|절도|폭행|상해|강제추행|성폭력|마약|"
                               r"횡령|배임|도주|무면허운전|재물손괴|공무집행방해")
-# 동종(범죄)전력 "prior record of the same kind" | 총 "in total" | 회 counter for occurrences
+# Narrative count: the phrase for "prior record of the same kind" (with an optional inner
+# word for "offense"), or the word for "in total", then a number, then the occurrence counter
 _RE_PRIOR_NARRATIVE = re.compile(r"(?:동종(?:\s*범죄)?\s*전력이?|총)\s*(\d+)\s*회")
-# Procedural dates, not punishments: 확정 "(judgment) became final", 가석방 "parole",
-# 석방 "release", 종료 "completion", 경과 "elapse", 만료 "expiry"
+# Procedural dates, not punishments, in pattern order: "(judgment) became final", "parole",
+# "release", "completion", "elapse", "expiry"
 _RE_PROC_DATE = re.compile(r"확정|가석방|석방|종료|경과|만료")
 def extract_prior_dui_count(facts: str) -> int:
     record = _record_section(facts)
@@ -169,7 +168,7 @@ def extract_prior_dui_count(facts: str) -> int:
         elif _RE_OTHER_CHARGE.search(ctx):
             last_alcohol = False  # explicit non-alcohol charge breaks inheritance
         elif _RE_SAME.search(ctx) or True:
-            if last_alcohol:      # 같은 죄 ("the same offense"), or no charge stated at all,
+            if last_alcohol:      # the anaphoric "same offense" case, or no charge stated,
                 n_dates += 1      # so inherit the charge of the preceding entry
     mn = _RE_PRIOR_NARRATIVE.search(record)
     n_narrative = int(mn.group(1)) if mn else 0

@@ -136,9 +136,9 @@ instructions](#usage-instructions)).
 
 ### A note on the Korean text in this repository
 
-**All comments, documentation, identifiers, and console output are in English.** Korean appears in
-three places only, and in each of them it is not commentary but material that the method operates
-on, so it is kept verbatim:
+**No comment, docstring, or console-output string anywhere in this repository contains Korean:
+every one of them is in English only.** Korean survives in three places, and in each of them it is
+not commentary but material that the method operates on, so it is kept verbatim:
 
 | where | what it is | why it stays Korean |
 |---|---|---|
@@ -146,9 +146,10 @@ on, so it is kept verbatim:
 | Keyword maps in `stage8_agreement.py` and `stage8b_tau_kernelshap.py` | substrings that detect which sentencing factor an LLM rationale cites | the LLMs answer in Korean; these substrings *are* the operational definition of "the model cited this factor" |
 | Prompts in `stage6_llm.py` and `law_context.txt` | the instruction prompt, the statute, and the sentencing guideline sent to the models | the prompt is the experimental stimulus; rewriting it would change what was measured |
 
-**Every Korean token used anywhere in the code is glossed in English at the point of use**, so a
-reader who does not read Korean can follow and audit each rule from the comments alone. The full
-prompt is additionally reproduced side by side in Korean and English in
+**Where a pattern or a keyword list contains Korean, the comment above it states the English
+meaning of every alternative, in the same order as the pattern lists them**, so a reader who does
+not read Korean can follow and audit each rule from the comments alone. The full prompt is
+additionally reproduced side by side in Korean and English in
 [`5_supplement/few_shot_open_book_prompt.md`](5_supplement/few_shot_open_book_prompt.md).
 
 The data files under `1_dataset/` and the cached model replies under
